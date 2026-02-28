@@ -44,9 +44,9 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
           <Link
             key={href}
             href={href}
-            className="inline-flex items-center gap-0 rounded-full bg-transparent p-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2"
+            className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2"
           >
-            <Icon className="h-4 w-4 shrink-0" />
+            <Icon className="h-5 w-5 shrink-0 lg:h-4 lg:w-4" />
             <span className="max-w-0 overflow-hidden opacity-0 lg:max-w-32 lg:opacity-100">
               {label}
             </span>
@@ -54,8 +54,8 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
         ))}
         <Popover>
           <PopoverTrigger asChild>
-            <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
-              <Pencil className="h-4 w-4 shrink-0" />
+            <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
+              <Pencil className="h-5 w-5 shrink-0 lg:h-4 lg:w-4" />
               <span className="max-w-0 overflow-hidden opacity-0 lg:max-w-32 lg:opacity-100">
                 Writing
               </span>
@@ -66,7 +66,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             side="top"
             align="center"
             sideOffset={12}
-            className="w-auto p-1"
+            className="w-auto p-1.5"
           >
             <div className="relative">
               <nav className="flex max-h-64 flex-col overflow-y-auto pb-8">
@@ -74,7 +74,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
                   <Link
                     key={article.slug}
                     href={`/writing/${article.slug}`}
-                    className="whitespace-nowrap rounded-sm px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    className="whitespace-nowrap rounded-sm px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
                     {article.title}
                   </Link>
@@ -86,8 +86,8 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
         </Popover>
         <Popover>
           <PopoverTrigger asChild>
-            <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
-              <Send className="h-4 w-4 shrink-0" />
+            <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
+              <Send className="h-5 w-5 shrink-0 lg:h-4 lg:w-4" />
               <span className="max-w-0 overflow-hidden opacity-0 lg:max-w-32 lg:opacity-100">
                 Contact
               </span>
@@ -98,7 +98,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             side="top"
             align="end"
             sideOffset={12}
-            className="w-auto p-1"
+            className="w-auto p-1.5"
           >
             {CONTACT_LINKS.map(({ label, href, icon: Icon }) => (
               <a
@@ -106,7 +106,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="flex items-center gap-2 whitespace-nowrap rounded-sm px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex items-center gap-2 whitespace-nowrap rounded-sm px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 <Icon className="h-3.5 w-3.5" />
                 {label}
