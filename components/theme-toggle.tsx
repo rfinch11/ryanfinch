@@ -40,7 +40,7 @@ export function ThemeToggle() {
         <CurrentIcon className="h-4 w-4" />
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-2 flex flex-col gap-1 rounded-lg border border-border bg-background/80 p-1.5 shadow-lg backdrop-blur-md">
+        <div className="absolute right-0 top-full mt-2 flex flex-col gap-1 rounded-xl border border-border bg-background/80 p-1.5 shadow-lg backdrop-blur-md">
           {modes.map(({ value, label, icon: Icon }) => (
             <button
               key={value}
@@ -48,7 +48,7 @@ export function ThemeToggle() {
                 setTheme(value);
                 setOpen(false);
               }}
-              className={`flex items-center gap-2 whitespace-nowrap rounded-md px-4 py-2.5 text-sm transition-colors ${
+              className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-sm transition-colors ${
                 theme === value
                   ? "bg-accent text-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"

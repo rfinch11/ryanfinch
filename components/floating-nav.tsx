@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef, useState, useCallback } from "react";
 import Link from "next/link";
-import { Sparkle, File, Pencil, Send, Github, Mail, ChevronUp } from "lucide-react";
+import { Sparkle, File, Pencil, Send, Github, Mail, ChevronUp, ChevronDown } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -37,6 +38,15 @@ interface FloatingNavProps {
 }
 
 export function FloatingNav({ articles = [] }: FloatingNavProps) {
+  const navRef = useRef<HTMLElement>(null);
+  const [atBottom, setAtBottom] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    const el = navRef.current;
+    if (!el) return;
+    setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 4);
+  }, []);
+
   return (
     <div className="fixed bottom-12 left-1/2 z-50 -translate-x-1/2">
       <div className="flex items-center gap-1 rounded-full border border-border bg-background/80 px-2 py-1.5 shadow-lg backdrop-blur-md">
@@ -68,19 +78,24 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             sideOffset={12}
             className="w-auto p-1.5"
           >
-            <div className="relative">
-              <nav className="flex max-h-64 flex-col overflow-y-auto pb-8">
+            <p className="px-4 pb-1 pt-2 text-xs font-medium text-muted-foreground/60">
+              Writing
+            </p>
+            <div className="relative overflow-hidden">
+              <nav ref={navRef} onScroll={handleScroll} className="flex max-h-64 flex-col overflow-y-auto pb-8">
                 {articles.map((article) => (
                   <Link
                     key={article.slug}
                     href={`/writing/${article.slug}`}
-                    className="whitespace-nowrap rounded-sm px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    className="whitespace-nowrap rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
-                    {article.title}
+                    {article.title.length > 30 ? `${article.title.slice(0, 30)}…` : article.title}
                   </Link>
                 ))}
               </nav>
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-popover to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-10 items-end justify-center bg-gradient-to-t from-popover to-transparent pb-1.5">
+                <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${atBottom ? "rotate-180" : ""}`} />
+              </div>
             </div>
           </PopoverContent>
         </Popover>
@@ -100,13 +115,16 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             sideOffset={12}
             className="w-auto p-1.5"
           >
+            <p className="px-4 pb-1 pt-2 text-xs font-medium text-muted-foreground/60">
+              Contact
+            </p>
             {CONTACT_LINKS.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="flex items-center gap-2 whitespace-nowrap rounded-sm px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 <Icon className="h-3.5 w-3.5" />
                 {label}
