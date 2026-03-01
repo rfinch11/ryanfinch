@@ -8,7 +8,7 @@ export default function ResumePage() {
   const articles = getAllPosts();
 
   return (
-    <div className="flex min-h-svh flex-col justify-between px-6 py-16 sm:px-12 md:px-24 lg:px-32">
+    <div className="flex min-h-svh flex-col px-6 py-16 sm:px-12 md:px-24 lg:px-32">
       <header className="flex items-center justify-between">
         <Link
           href="/"
@@ -19,11 +19,13 @@ export default function ResumePage() {
         <ThemeToggle />
       </header>
 
-      <main className="my-auto py-24">
+      <main className="pt-24">
         <WorkTimeline />
       </main>
 
-      <FloatingNav articles={articles} />
+      <div className="mt-auto">
+        <FloatingNav articles={articles} />
+      </div>
     </div>
   );
 }
