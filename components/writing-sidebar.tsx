@@ -23,7 +23,7 @@ export function WritingBottomNav({ posts, currentSlug }: WritingSidebarProps) {
                 : "text-muted-foreground hover:bg-accent hover:text-foreground"
             }`}
           >
-            {post.title.length > 30 ? `${post.title.slice(0, 30)}…` : post.title}
+            {post.title}
           </Link>
         ))}
       </nav>

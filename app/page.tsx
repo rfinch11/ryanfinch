@@ -16,12 +16,11 @@ export default function Home() {
       <main className="my-auto flex flex-col gap-6 py-24">
         <div className="flex items-center gap-6">
           <Image
-            src="/avatar.gif"
+            src="/profile-color-clouds.png"
             alt="Ryan Finch"
             width={60}
             height={60}
             className="rounded-full"
-            unoptimized
           />
           <h1 className="font-display font-normal text-heading-72">
             FINCH
