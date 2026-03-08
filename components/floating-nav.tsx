@@ -89,8 +89,8 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
                     href={`/writing/${article.slug}`}
                     className="flex items-center whitespace-nowrap rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
-                    {article.title.length > 30 ? `${article.title.slice(0, 30)}…` : article.title}
-                    {article.slug === "7-short-thoughts" && (
+                    {article.title}
+                    {article.slug === "vibecoding-impact-on-design" && (
                       <span className="ml-2 inline-flex items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground">
                         NEW
                       </span>
