@@ -22,9 +22,14 @@ export default function WritingPage() {
             <li key={post.slug}>
               <Link
                 href={`/writing/${post.slug}`}
-                className="text-copy-16 text-muted-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:text-foreground hover:decoration-foreground"
+                className="inline-flex items-center gap-2 text-copy-16 text-muted-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:text-foreground hover:decoration-foreground"
               >
                 {post.title}
+                {post.isNew && (
+                  <span className="inline-flex items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground no-underline">
+                    NEW
+                  </span>
+                )}
               </Link>
             </li>
           ))}

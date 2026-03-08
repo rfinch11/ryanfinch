@@ -31,6 +31,7 @@ const CONTACT_LINKS = [
 interface Article {
   slug: string;
   title: string;
+  isNew?: boolean;
 }
 
 interface FloatingNavProps {
@@ -90,7 +91,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
                     className="flex items-center whitespace-nowrap rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
                     {article.title}
-                    {article.slug === "vibecoding-impact-on-design" && (
+                    {article.isNew && (
                       <span className="ml-2 inline-flex items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground">
                         NEW
                       </span>

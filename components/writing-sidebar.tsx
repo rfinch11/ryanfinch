@@ -17,13 +17,18 @@ export function WritingBottomNav({ posts, currentSlug }: WritingSidebarProps) {
           <Link
             key={post.slug}
             href={`/writing/${post.slug}`}
-            className={`rounded-md px-3 py-2 text-sm transition-colors ${
+            className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
               post.slug === currentSlug
                 ? "bg-accent text-foreground"
                 : "text-muted-foreground hover:bg-accent hover:text-foreground"
             }`}
           >
             {post.title}
+            {post.isNew && (
+              <span className="inline-flex shrink-0 items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground">
+                NEW
+              </span>
+            )}
           </Link>
         ))}
       </nav>
@@ -42,13 +47,18 @@ export function WritingSidebarDesktop({ posts, currentSlug }: WritingSidebarProp
           <Link
             key={post.slug}
             href={`/writing/${post.slug}`}
-            className={`truncate rounded-md px-3 py-2 text-sm transition-colors ${
+            className={`flex items-center gap-2 truncate rounded-md px-3 py-2 text-sm transition-colors ${
               post.slug === currentSlug
                 ? "bg-accent text-foreground"
                 : "text-muted-foreground hover:bg-accent hover:text-foreground"
             }`}
           >
-            {post.title}
+            <span className="truncate">{post.title}</span>
+            {post.isNew && (
+              <span className="inline-flex shrink-0 items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground">
+                NEW
+              </span>
+            )}
           </Link>
         ))}
       </nav>
