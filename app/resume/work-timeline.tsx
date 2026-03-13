@@ -37,9 +37,12 @@ const WORK_HISTORY: WorkEntry[] = [
     description:
       "Leading product design for Ops Tools, AI agents, and service design for the world's first purpose-built robotaxi company.",
     gallery: [
-      { src: "https://picsum.photos/seed/zoox1/600/400", type: "image", caption: "Ops dashboard for fleet management" },
-      { src: "https://picsum.photos/seed/zoox2/400/600", type: "image", caption: "Rider app experience" },
-      { src: "https://picsum.photos/seed/zoox3/600/400", type: "image", caption: "Service design blueprint", link: { label: "Case study", href: "https://zoox.com/" } },
+      { src: "/Zoox Heros/Zoox Autonomous Vehicle - Single Side - Coit Tower SF.png", type: "image" },
+      { src: "/Zoox Heros/Zoox Autonomous Vehicle - Interior day.png", type: "image" },
+      { src: "/Zoox Heros/IMG_7636.jpg", type: "image" },
+      { src: "/Zoox Heros/IMG_1188.PNG", type: "image" },
+      { src: "/Zoox Heros/Screenshot 2026-02-02 at 8.48.28 PM.png", type: "image" },
+      { src: "/Zoox Heros/Group 10.png", type: "image" },
     ],
     links: [{ label: "Zoox", href: "https://zoox.com/" }],
   },
@@ -52,10 +55,12 @@ const WORK_HISTORY: WorkEntry[] = [
     description:
       "Led research for Facebook Sharing across Reels, Stories, Feed, Messenger, and Facebook Lite.",
     gallery: [
-      { src: "https://picsum.photos/seed/meta1/600/400", type: "image", caption: "Reels creation flow" },
-      { src: "https://picsum.photos/seed/meta2/400/600", type: "image", caption: "Stories composer redesign" },
-      { src: "https://picsum.photos/seed/meta3/600/400", type: "image", caption: "Feed ranking research" },
-      { src: "https://picsum.photos/seed/meta4/600/400", type: "image", caption: "Messenger sharing patterns", link: { label: "Reels launch", href: "https://about.fb.com/news/2022/02/launching-facebook-reels-globally/" } },
+      { src: "/Meta Heros/Group 9.png", type: "image" },
+      { src: "/Meta Heros/Group 11.png", type: "image" },
+      { src: "/Meta Heros/Group 12.png", type: "image" },
+      { src: "/Meta Heros/IMG_3836 5.png", type: "image" },
+      { src: "/Meta Heros/IMG_3836 7.png", type: "image" },
+      { src: "/Meta Heros/image 22.png", type: "image" },
     ],
     links: [
       {
@@ -77,8 +82,11 @@ const WORK_HISTORY: WorkEntry[] = [
     description:
       "Incubating autonomous vehicle services, connected vehicles, and mobility services in IDEO x Ford's Human Centered Design Lab, D-Ford.",
     gallery: [
-      { src: "https://picsum.photos/seed/ford1/600/400", type: "image", caption: "Autonomous vehicle service concept" },
-      { src: "https://picsum.photos/seed/ford2/400/600", type: "image", caption: "Connected vehicle prototype", link: { label: "D-Ford", href: "https://medium.com/dford" } },
+      { src: "/Ford Heros/Screen Shot 2023-03-29 at 8.51 1.png", type: "image" },
+      { src: "/Ford Heros/Screen Shot 2023-03-29 at 8.51 2.png", type: "image" },
+      { src: "/Ford Heros/Screen Shot 2023-08-23 at 11.16.png", type: "image" },
+      { src: "/Ford Heros/Screen Shot 2023-08-23 at 11.17.png", type: "image" },
+      { src: "/Ford Heros/image 19.png", type: "image" },
     ],
     links: [{ label: "D-Ford", href: "https://medium.com/dford" }],
   },
@@ -91,9 +99,10 @@ const WORK_HISTORY: WorkEntry[] = [
     description:
       "Led design and UX research across fleet management software, connected products, autonomous equipment, consultative services, and new business models.",
     gallery: [
-      { src: "https://picsum.photos/seed/crown1/600/400", type: "image", caption: "Fleet management dashboard" },
-      { src: "https://picsum.photos/seed/crown2/600/400", type: "image", caption: "Connected forklift analytics" },
-      { src: "https://picsum.photos/seed/crown3/400/600", type: "image", caption: "Operator interface study" },
+      { src: "/Crown Heros/Screen Shot 2023-08-15 at 8.53 2.png", type: "image" },
+      { src: "/Crown Heros/Screen Shot 2023-08-23 at 11.06.png", type: "image" },
+      { src: "/Crown Heros/image 2.png", type: "image" },
+      { src: "/Crown Heros/image 26.png", type: "image" },
     ],
     links: [
       { label: "Crown", href: "https://www.crown.com/en-us.html" },
@@ -112,8 +121,9 @@ const WORK_HISTORY: WorkEntry[] = [
     description:
       "Solo designer for all web, social, packaging, and in-store visual design. Industrial designer for national doorbell line.",
     gallery: [
-      { src: "https://picsum.photos/seed/heathco1/600/400", type: "image", caption: "Doorbell product line" },
-      { src: "https://picsum.photos/seed/heathco2/400/600", type: "image", caption: "Packaging design" },
+      { src: "/HeathCo Heros/Screen Shot 2023-08-23 at 11.25.png", type: "image" },
+      { src: "/HeathCo Heros/Screen Shot 2023-08-23 at 11.254.png", type: "image" },
+      { src: "/HeathCo Heros/Screen Shot 2023-08-23 at 11.256.png", type: "image" },
     ],
     links: [],
   },
