@@ -41,7 +41,7 @@ const WORK_HISTORY: WorkEntry[] = [
       { src: "/Zoox Heros/Zoox Autonomous Vehicle - Interior day.png", type: "image" },
       { src: "/Zoox Heros/IMG_7636.jpg", type: "image" },
       { src: "/Zoox Heros/IMG_1188.PNG", type: "image" },
-      { src: "/Zoox Heros/Screenshot 2026-02-02 at 8.48.28 PM.png", type: "image" },
+      { src: "/Zoox Heros/Screenshot 2026-02-02.png", type: "image" },
       { src: "/Zoox Heros/Group 10.png", type: "image" },
     ],
     links: [{ label: "Zoox", href: "https://zoox.com/" }],
