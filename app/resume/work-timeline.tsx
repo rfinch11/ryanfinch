@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronsUpDown, ChevronsDownUp, MapPin, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronsUpDown, ChevronsDownUp, MapPin, X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface WorkLink {
   label: string;
   href: string;
+  description?: string;
 }
 
 interface GalleryItem {
@@ -34,8 +35,7 @@ const WORK_HISTORY: WorkEntry[] = [
     dateRange: "2023 — Present",
     title: "Senior Manager, Product Design",
     location: "Foster City, CA",
-    description:
-      "Leading product design for Ops Tools, AI agents, and service design for the world's first purpose-built robotaxi company.",
+    description: "",
     gallery: [
       { src: "/Zoox Heros/Zoox Autonomous Vehicle - Single Side - Coit Tower SF.png", type: "image" },
       { src: "/Zoox Heros/Zoox Autonomous Vehicle - Interior day.png", type: "image" },
@@ -44,7 +44,12 @@ const WORK_HISTORY: WorkEntry[] = [
       { src: "/Zoox Heros/Screenshot 2026-02-02.png", type: "image" },
       { src: "/Zoox Heros/Group 10.png", type: "image" },
     ],
-    links: [{ label: "Zoox", href: "https://zoox.com/" }],
+    links: [
+      { label: "How Self-Driving Cars Get Help From Humans Hundreds of Miles Away", href: "https://www.nytimes.com/interactive/2024/09/03/technology/zoox-self-driving-cars-remote-control.html", description: "I lead all of design for all remote operations, ground operations, cartography, and internal tools" },
+      { label: "Zoox is now welcoming its first public riders in San Francisco", href: "https://zoox.com/journal/zoox-robotaxi-in-san-francisco/", description: "Led the E2E design of our first time UX for our public launch in San Francisco" },
+      { label: "Zoox is live in Las Vegas", href: "https://zoox.com/journal/las-vegas", description: "Led the launch roadmap and E2E design of our first time UX for our public launch in Las Vegas" },
+      { label: "Zoox becomes official robotaxi partner of Resorts World Las Vegas", href: "https://zoox.com/journal/resorts-world-las-vegas/", description: "Led the E2E design for the Resorts World partnership & on-prem installation" },
+    ],
   },
   {
     id: "meta",
@@ -383,9 +388,11 @@ export function WorkTimeline() {
                           {entry.location}
                         </span>
                       </p>
-                      <p className="text-copy-14 text-muted-foreground">
-                        {entry.description}
-                      </p>
+                      {entry.description && (
+                        <p className="text-copy-14 text-muted-foreground">
+                          {entry.description}
+                        </p>
+                      )}
 
                       {entry.gallery.length > 0 && (
                         <div className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-2 sm:-mx-0 sm:px-0">
@@ -406,18 +413,26 @@ export function WorkTimeline() {
                       )}
 
                       {entry.links.length > 0 && (
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-col gap-3">
+                          <p className="text-label-12 uppercase tracking-wider text-muted-foreground/60">Highlights</p>
+                          <ul className="flex flex-col gap-2 list-disc pl-4">
                           {entry.links.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-copy-14 text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:decoration-foreground"
-                            >
-                              {link.label}
-                            </a>
+                            <li key={link.href} className="text-copy-14 text-muted-foreground">
+                              <a
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-baseline gap-0.5 text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:decoration-foreground"
+                              >
+                                {link.label}
+                                <ArrowUpRight className="inline h-3 w-3 shrink-0 self-center" />
+                              </a>
+                              {link.description && (
+                                <span className="ml-1">{link.description}</span>
+                              )}
+                            </li>
                           ))}
+                          </ul>
                         </div>
                       )}
                     </div>
