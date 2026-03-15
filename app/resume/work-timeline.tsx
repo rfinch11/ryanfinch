@@ -35,7 +35,7 @@ const WORK_HISTORY: WorkEntry[] = [
     dateRange: "2023 — Present",
     title: "Senior Manager, Product Design",
     location: "Foster City, CA",
-    description: "",
+    description: "Leading product design for Ops Tools, AI agents, and service design for the world's first purpose-built robotaxi company.",
     gallery: [
       { src: "/Zoox Heros/Zoox Autonomous Vehicle - Single Side - Coit Tower SF.png", type: "image" },
       { src: "/Zoox Heros/Zoox Autonomous Vehicle - Interior day.png", type: "image" },
