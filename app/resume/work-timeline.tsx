@@ -71,10 +71,7 @@ const WORK_HISTORY: WorkEntry[] = [
       {
         label: "Reels launch",
         href: "https://about.fb.com/news/2022/02/launching-facebook-reels-globally/",
-      },
-      {
-        label: "Stories ads",
-        href: "https://www.facebook.com/business/ads/stories-ad-format#",
+        description: "Led research for Reels creation 0-1 including pilots in India, US launch, and global rollout.",
       },
     ],
   },
@@ -93,7 +90,7 @@ const WORK_HISTORY: WorkEntry[] = [
       { src: "/Ford Heros/Screen Shot 2023-08-23 at 11.17.png", type: "image" },
       { src: "/Ford Heros/image 19.png", type: "image" },
     ],
-    links: [{ label: "D-Ford", href: "https://medium.com/dford" }],
+    links: [],
   },
   {
     id: "crown",
@@ -109,13 +106,7 @@ const WORK_HISTORY: WorkEntry[] = [
       { src: "/Crown Heros/image 2.png", type: "image" },
       { src: "/Crown Heros/image 26.png", type: "image" },
     ],
-    links: [
-      { label: "Crown", href: "https://www.crown.com/en-us.html" },
-      {
-        label: "Forklift utilization",
-        href: "https://www.mhlnews.com/powered-vehicles-and-forklifts/article/22055166/better-data-adds-up-to-better-forklift-utilization",
-      },
-    ],
+    links: [],
   },
   {
     id: "early",
@@ -418,18 +409,17 @@ export function WorkTimeline() {
                           <ul className="flex flex-col gap-2 list-disc pl-4">
                           {entry.links.map((link) => (
                             <li key={link.href} className="text-copy-14 text-muted-foreground">
+                              {link.description && (
+                                <span className="mr-1">{link.description}</span>
+                              )}
                               <a
                                 href={link.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-baseline gap-0.5 text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:decoration-foreground"
+                                className="inline text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:decoration-foreground"
                               >
-                                {link.label}
-                                <ArrowUpRight className="inline h-3 w-3 shrink-0 self-center" />
+                                {link.label}<ArrowUpRight className="inline h-3 w-3 shrink-0 align-middle ml-0.5" />
                               </a>
-                              {link.description && (
-                                <span className="ml-1">{link.description}</span>
-                              )}
                             </li>
                           ))}
                           </ul>
