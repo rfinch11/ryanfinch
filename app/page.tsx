@@ -43,6 +43,19 @@ export default function Home() {
           <a href="https://www.crown.com/en-us.html" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:decoration-foreground">Crown</a>.
           There&apos;s a good chance I designed the doorbell in your house.
         </p>
+        <div className="hidden lg:flex items-center gap-3 text-muted-foreground/50">
+          <div className="flex items-center gap-1">
+            {["shift", "?"].map((k) => (
+              <kbd
+                key={k}
+                className="inline-flex min-w-[1.25rem] items-center justify-center rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground/50 shadow-[0_1px_0_0_hsl(var(--border))]"
+              >
+                {k}
+              </kbd>
+            ))}
+          </div>
+          <span className="text-sm">Konami for a good time</span>
+        </div>
       </main>
 
       <FloatingNav articles={articles} />

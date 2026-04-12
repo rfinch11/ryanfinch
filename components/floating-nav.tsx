@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Sparkle, File, Pencil, Send, Github, Mail, ChevronUp, ChevronDown } from "lucide-react";
 import {
@@ -45,6 +45,13 @@ interface FloatingNavProps {
 export function FloatingNav({ articles = [] }: FloatingNavProps) {
   const navRef = useRef<HTMLElement>(null);
   const [atBottom, setAtBottom] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setContactOpen(true);
+    window.addEventListener("hotkey:contact", handler);
+    return () => window.removeEventListener("hotkey:contact", handler);
+  }, []);
 
   const handleScroll = useCallback(() => {
     const el = navRef.current;
@@ -158,7 +165,7 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
         </Popover>
 
         {/* Contact popover */}
-        <Popover>
+        <Popover open={contactOpen} onOpenChange={setContactOpen}>
           <PopoverTrigger asChild>
             <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
               <Send className="h-5 w-5 shrink-0 lg:h-4 lg:w-4" />
