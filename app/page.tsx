@@ -16,10 +16,10 @@ export default function Home() {
       <main className="my-auto flex flex-col gap-6 py-24">
         <div className="flex items-center gap-6">
           <Image
-            src="/profile-color-clouds.png"
+            src="/avatar.png"
             alt="Ryan Finch"
-            width={60}
-            height={60}
+            width={75}
+            height={75}
             className="rounded-full"
           />
           <h1 className="font-display font-normal text-heading-72">
