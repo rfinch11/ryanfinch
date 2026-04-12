@@ -79,9 +79,12 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             sideOffset={12}
             className="w-auto p-1.5"
           >
-            <p className="px-4 pb-1 pt-2 text-xs font-medium text-muted-foreground/60">
+            <Link
+              href="/writing"
+              className="flex px-4 pb-1 pt-2 text-xs font-medium text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+            >
               Writing
-            </p>
+            </Link>
             <div className="relative overflow-hidden">
               <nav ref={navRef} onScroll={handleScroll} className="flex max-h-64 flex-col overflow-y-auto pb-8">
                 {articles.map((article) => (

@@ -15,25 +15,23 @@ export default function WritingPage() {
         <ThemeToggle />
       </header>
 
-      <main className="my-auto flex flex-col gap-8 py-24">
-        <h1 className="text-heading-32">Writing</h1>
-        <ul className="flex flex-col gap-4">
+      <main className="my-auto py-24">
+        <nav className="flex flex-col gap-1">
           {posts.map((post) => (
-            <li key={post.slug}>
-              <Link
-                href={`/writing/${post.slug}`}
-                className="inline-flex items-center gap-2 text-copy-16 text-muted-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:text-foreground hover:decoration-foreground"
-              >
-                {post.title}
-                {post.isNew && (
-                  <span className="inline-flex items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground no-underline">
-                    NEW
-                  </span>
-                )}
-              </Link>
-            </li>
+            <Link
+              key={post.slug}
+              href={`/writing/${post.slug}`}
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              <span>{post.title}</span>
+              {post.isNew && (
+                <span className="inline-flex shrink-0 items-center rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary-foreground">
+                  NEW
+                </span>
+              )}
+            </Link>
           ))}
-        </ul>
+        </nav>
       </main>
 
       <FloatingNav articles={posts} />
