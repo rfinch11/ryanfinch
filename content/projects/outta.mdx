@@ -1,0 +1,20 @@
+---
+title: Outta
+subtitle: Vibecoded discovery platform with a real, scalable data pipeline
+video: outta-video.mov
+thumb: outta-thumb.png
+---
+
+[Outta](https://outta.events) is a discovery site for kid-friendly adventures: activities, events, and camps near you. I built it with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Supabase, and it runs on Vercel.
+
+The product side is familiar enough — tabs for events, activities, and camps; search; filters for distance, date, price, tags, and more; location via geolocation and zip; detail pages with maps and sharing; and a flow for community submissions. 
+
+**Where the listings come from**
+
+Outta ingests from several sources and keeps them fresh without manual babysitting:
+
+- **Scrapers (GitHub Actions, daily):** Playwright-based imports, each writing straight into Supabase.
+- **RSS (Vercel Cron):** BiblioCommons feeds for libraries parsed, deduped, and normalized.
+- **Enrichment (cron):** Unsplash for imagery when a listing needs a photo, and Google Maps geocoding so addresses become coordinates for maps and distance.
+
+Outta was a side project, but the interesting part is the pipeline: multiple ingest paths, scheduled jobs, and a database schema designed around real-world messy data (library RSS next to museum scrapes next to park calendars). Repo is [rfinch11/outta-nextjs](https://github.com/rfinch11/outta-nextjs) on GitHub. Production is at [outta.events](https://outta.events).

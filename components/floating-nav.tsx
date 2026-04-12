@@ -17,8 +17,12 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
+const PROJECT_ITEMS = [
+  { label: "Outta", href: "/projects/outta", thumb: "/outta-thumb.png" },
+  { label: "Sidebar", href: "/projects/sidebar", thumb: "/sidebar-thumb.png" },
+];
+
 const NAV_LINKS = [
-  { label: "Playground", href: "/projects", icon: Sparkle },
   { label: "Resume", href: "/resume", icon: File },
 ];
 
@@ -51,6 +55,48 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
   return (
     <div className="fixed bottom-12 left-1/2 z-50 -translate-x-1/2">
       <div className="flex items-center gap-1 rounded-full border border-border bg-background/80 px-2 py-1.5 shadow-lg backdrop-blur-md">
+        {/* Projects popover */}
+        <Popover>
+          <PopoverTrigger asChild>
+            <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
+              <Sparkle className="h-5 w-5 shrink-0 lg:h-4 lg:w-4" />
+              <span className="max-w-0 overflow-hidden opacity-0 lg:max-w-32 lg:opacity-100">
+                Projects
+              </span>
+              <ChevronUp className="h-3 w-3 shrink-0 hidden lg:block" />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent
+            side="top"
+            align="start"
+            sideOffset={12}
+            className="w-56 p-1.5"
+          >
+            <Link
+              href="/projects"
+              className="flex px-4 pb-1 pt-2 text-xs font-medium text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+            >
+              Projects
+            </Link>
+            <div className="flex flex-col gap-1 p-1">
+              {PROJECT_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-accent"
+                >
+                  <img
+                    src={item.thumb}
+                    alt={item.label}
+                    className="w-full rounded-md object-cover aspect-video"
+                  />
+                </Link>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Resume direct link */}
         {NAV_LINKS.map(({ label, href, icon: Icon }) => (
           <Link
             key={href}
@@ -63,6 +109,8 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             </span>
           </Link>
         ))}
+
+        {/* Writing popover */}
         <Popover>
           <PopoverTrigger asChild>
             <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
@@ -108,6 +156,8 @@ export function FloatingNav({ articles = [] }: FloatingNavProps) {
             </div>
           </PopoverContent>
         </Popover>
+
+        {/* Contact popover */}
         <Popover>
           <PopoverTrigger asChild>
             <button className="inline-flex items-center gap-0 rounded-full bg-transparent p-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:gap-1.5 lg:px-4 lg:py-2">
