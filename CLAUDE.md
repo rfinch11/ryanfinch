@@ -1,0 +1,53 @@
+# Claude Code instructions for ryanfinch.me
+
+## Before writing or modifying any UI code
+
+1. Read the relevant spec file in `specs/` before touching a component.
+2. Use only tokens from `tokens.css`. Components must only reference `--token-*` (Layer 2) variables — never raw hex, oklch, px font sizes, or hardcoded box shadows.
+3. Run the token audit script before committing:
+   ```
+   node scripts/token-audit.js
+   ```
+   Zero errors required. Warnings should be resolved where possible.
+
+## Project structure
+
+- `app/` — Next.js App Router pages and layouts
+- `components/` — Shared React components
+- `content/` — MDX content for writing articles and projects
+- `lib/` — Server-side data helpers (writing, projects)
+- `public/` — Static assets (images, videos, fonts)
+- `specs/` — Design system specs (read before editing UI)
+- `tokens.css` — Design token layer (source of truth for visual values)
+- `scripts/token-audit.js` — CI-ready audit script
+
+## Design system
+
+- **Tokens**: `tokens.css` defines a three-layer token architecture. Layer 1 = OKLCH primitives, Layer 2 = semantic `--token-*` aliases, Layer 3 = components.
+- **Theming**: Four themes — `light`, `dark`, `warm-light` (default), `warm-dark` — managed by `next-themes` via class on `<html>`. CSS custom properties are scoped per theme class in `app/globals.css`.
+- **Tailwind v4**: Utility classes map to CSS custom properties via `@theme inline` in `globals.css`. Prefer semantic utilities (`text-foreground`, `bg-background`, `border-border`) over arbitrary values.
+- **Typography scale**: Custom utilities — `text-heading-72`, `text-heading-32`, `text-copy-16`, `text-copy-14`, `text-label-12` — defined in `globals.css`. Use these rather than raw `text-[px]` values.
+
+## Component specs index
+
+| Component | Spec |
+|---|---|
+| FloatingNav | `specs/components/floating-nav.md` |
+| ThemeToggle | `specs/components/theme-toggle.md` |
+| KeyboardShortcuts | `specs/components/keyboard-shortcuts.md` |
+| HotkeyHint | `specs/components/hotkey-hint.md` |
+| WritingSidebar | `specs/components/writing-sidebar.md` |
+| MdxComponents | `specs/components/mdx-components.md` |
+| ThemeProvider | `specs/components/theme-provider.md` |
+| WorkTimeline | `specs/components/work-timeline.md` |
+| Popover | `specs/components/popover.md` |
+
+## Stack
+
+- Next.js 16, App Router, TypeScript, React 19
+- Tailwind CSS v4, shadcn/ui (Radix UI primitives)
+- next-themes for theme management
+- next-mdx-remote/rsc for MDX rendering
+- gray-matter for frontmatter
+- lucide-react for icons
+- Deployed on Vercel at ryanfinch.me

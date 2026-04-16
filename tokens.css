@@ -1,0 +1,342 @@
+/*
+ * tokens.css — Design token layer for ryanfinch.me
+ *
+ * THREE-LAYER ARCHITECTURE
+ * ========================
+ *
+ * Layer 1: UPSTREAM PRIMITIVES
+ *   Raw OKLCH values sourced from globals.css @:root, .dark, .warm-light, and .warm-dark.
+ *   These are the actual colour science values. They are NOT used directly in components.
+ *   Naming convention: --prim-<semantic>-<theme variant>
+ *
+ * Layer 2: PROJECT ALIASES
+ *   Single-purpose tokens that reference Layer 1 primitives (with var() fallbacks).
+ *   These are the ONLY tokens that components and pages should ever reference.
+ *   Naming convention: --token-<category>-<role>
+ *
+ * Layer 3: USAGE CONTRACT (see comment block at bottom of this file)
+ *   Components must ONLY consume Layer 2 (--token-*) tokens.
+ *   They must never hard-code colour, spacing, or radius values.
+ *   This file is the source of truth; globals.css owns the :root colour scale.
+ *
+ * NOTE: This file is a spec/reference layer. Import after globals.css if you
+ * want the --token-* variables available to Tailwind CSS v4 via @theme inline.
+ */
+
+/* ============================================================
+   LAYER 1 — UPSTREAM PRIMITIVES
+   (mirrors exactly what globals.css defines per :root / theme class)
+   ============================================================ */
+
+/*
+  The values below are read-only documentation of the OKLCH scale used.
+  They duplicate what globals.css already defines on :root / .dark /
+  .warm-light / .warm-dark so that this file is self-contained for LLMs
+  and documentation tools that parse only tokens.css.
+
+  Format: oklch(<lightness> <chroma> <hue>)
+  — lightness: 0 (black) → 1 (white)
+  — chroma:    0 (grey)  → ~0.37 (maximally saturated)
+  — hue:       0–360 degrees (0/360 = red, 80 = warm yellow, 180 = cyan, 264 = blue)
+*/
+
+:root {
+  /* --- Greyscale neutral scale (zero chroma) --- */
+  --prim-neutral-000: oklch(1 0 0);       /* pure white */
+  --prim-neutral-025: oklch(0.985 0 0);   /* near white — primary-foreground, sidebar-primary-foreground */
+  --prim-neutral-050: oklch(0.97 0 0);    /* light grey — secondary, muted, accent */
+  --prim-neutral-100: oklch(0.922 0 0);   /* border / input */
+  --prim-neutral-200: oklch(0.708 0 0);   /* ring */
+  --prim-neutral-300: oklch(0.556 0 0);   /* muted-foreground */
+  --prim-neutral-700: oklch(0.269 0 0);   /* dark secondary / muted / accent */
+  --prim-neutral-800: oklch(0.205 0 0);   /* primary (dark on light) */
+  --prim-neutral-900: oklch(0.145 0 0);   /* foreground (dark on light) */
+
+  /* --- Warm neutral scale (low chroma, hue ~75-80) --- */
+  --prim-warm-bg-light:      oklch(0.97 0.012 80);
+  --prim-warm-fg-light:      oklch(0.2 0.02 60);
+  --prim-warm-card-light:    oklch(0.97 0.012 80);
+  --prim-warm-secondary:     oklch(0.93 0.02 80);
+  --prim-warm-muted-fg:      oklch(0.5 0.03 70);
+  --prim-warm-accent:        oklch(0.93 0.025 78);
+  --prim-warm-border:        oklch(0.88 0.025 78);
+  --prim-warm-ring:          oklch(0.65 0.04 75);
+  --prim-warm-primary:       oklch(0.25 0.025 65);
+  --prim-warm-primary-fg:    oklch(0.96 0.015 80);
+  --prim-warm-sidebar:       oklch(0.95 0.015 80);
+
+  --prim-warm-dark-bg:       oklch(0.16 0.015 75);
+  --prim-warm-dark-fg:       oklch(0.95 0.015 80);
+  --prim-warm-dark-card:     oklch(0.2 0.018 75);
+  --prim-warm-dark-secondary:oklch(0.25 0.02 75);
+  --prim-warm-dark-muted-fg: oklch(0.65 0.03 80);
+  --prim-warm-dark-accent:   oklch(0.25 0.025 75);
+  --prim-warm-dark-border:   oklch(0.9 0.04 80 / 12%);
+  --prim-warm-dark-ring:     oklch(0.55 0.03 80);
+  --prim-warm-dark-primary:  oklch(0.88 0.04 80);
+  --prim-warm-dark-primary-fg: oklch(0.2 0.015 75);
+
+  /* --- Semantic colour — destructive / error --- */
+  --prim-destructive-light: oklch(0.577 0.245 27.325);   /* red-orange, used in :root and .warm-light */
+  --prim-destructive-dark:  oklch(0.704 0.191 22.216);   /* lighter red, used in .dark and .warm-dark */
+
+  /* --- Chart / data-vis palette --- */
+  --prim-chart-1-light: oklch(0.646 0.222 41.116);  /* warm orange */
+  --prim-chart-2-light: oklch(0.6 0.118 184.704);   /* teal */
+  --prim-chart-3-light: oklch(0.398 0.07 227.392);  /* slate blue */
+  --prim-chart-4-light: oklch(0.828 0.189 84.429);  /* yellow */
+  --prim-chart-5-light: oklch(0.769 0.188 70.08);   /* amber */
+
+  --prim-chart-1-dark:  oklch(0.488 0.243 264.376); /* blue-violet */
+  --prim-chart-2-dark:  oklch(0.696 0.17 162.48);   /* green */
+  --prim-chart-3-dark:  oklch(0.769 0.188 70.08);   /* amber */
+  --prim-chart-4-dark:  oklch(0.627 0.265 303.9);   /* purple */
+  --prim-chart-5-dark:  oklch(0.645 0.246 16.439);  /* red */
+
+  --prim-chart-1-warm-dark: oklch(0.75 0.15 65);
+  --prim-chart-2-warm-dark: oklch(0.65 0.12 45);
+  --prim-chart-3-warm-dark: oklch(0.7 0.1 85);
+  --prim-chart-4-warm-dark: oklch(0.6 0.15 30);
+  --prim-chart-5-warm-dark: oklch(0.8 0.1 55);
+
+  /* --- Radius base --- */
+  --prim-radius-base: 0.625rem;  /* 10px — the project's --radius */
+
+  /* --- Spacing unit --- */
+  --prim-space-unit: 0.25rem;    /* 4px — Tailwind's base unit */
+}
+
+/* ============================================================
+   LAYER 2 — PROJECT ALIAS TOKENS
+   ============================================================
+   Rules:
+   1. Every alias references a Layer 1 primitive or a shadcn/ui
+      CSS custom property (--background, --foreground, etc.) that
+      itself resolves to a Layer 1 primitive.
+   2. Fallback values are the :root (light-mode) resolved primitive.
+   3. COMPONENTS AND PAGES MUST ONLY USE --token-* VARIABLES.
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     2A. COLOR TOKENS
+     ---------------------------------------------------------- */
+
+  /* Surface / background */
+  --token-bg-page:       var(--background, oklch(1 0 0));
+  --token-bg-card:       var(--card, oklch(1 0 0));
+  --token-bg-popover:    var(--popover, oklch(1 0 0));
+  --token-bg-muted:      var(--muted, oklch(0.97 0 0));
+  --token-bg-accent:     var(--accent, oklch(0.97 0 0));
+  --token-bg-sidebar:    var(--sidebar, oklch(0.985 0 0));
+
+  /* Text / foreground */
+  --token-text-default:      var(--foreground, oklch(0.145 0 0));
+  --token-text-muted:        var(--muted-foreground, oklch(0.556 0 0));
+  --token-text-on-primary:   var(--primary-foreground, oklch(0.985 0 0));
+  --token-text-on-card:      var(--card-foreground, oklch(0.145 0 0));
+  --token-text-on-popover:   var(--popover-foreground, oklch(0.145 0 0));
+  --token-text-on-accent:    var(--accent-foreground, oklch(0.205 0 0));
+  --token-text-on-secondary: var(--secondary-foreground, oklch(0.205 0 0));
+  --token-text-on-sidebar:   var(--sidebar-foreground, oklch(0.145 0 0));
+  --token-text-destructive:  var(--destructive, oklch(0.577 0.245 27.325));
+
+  /* Interactive / brand */
+  --token-color-primary:     var(--primary, oklch(0.205 0 0));
+  --token-color-secondary:   var(--secondary, oklch(0.97 0 0));
+  --token-color-accent:      var(--accent, oklch(0.97 0 0));
+  --token-color-destructive: var(--destructive, oklch(0.577 0.245 27.325));
+
+  /* Link */
+  --token-link-text:          var(--foreground, oklch(0.145 0 0));
+  --token-link-decoration:    color-mix(in oklch, var(--muted-foreground, oklch(0.556 0 0)) 30%, transparent);
+  --token-link-decoration-hover: var(--foreground, oklch(0.145 0 0));
+
+  /* Border / divider */
+  --token-border-default:  var(--border, oklch(0.922 0 0));
+  --token-border-input:    var(--input, oklch(0.922 0 0));
+  --token-border-ring:     var(--ring, oklch(0.708 0 0));
+  --token-border-sidebar:  var(--sidebar-border, oklch(0.922 0 0));
+
+  /* New badge / pill highlight */
+  --token-badge-bg:         var(--primary, oklch(0.205 0 0));
+  --token-badge-text:       var(--primary-foreground, oklch(0.985 0 0));
+
+  /* Overlay / backdrop */
+  --token-overlay:          color-mix(in oklch, var(--background, oklch(1 0 0)) 80%, transparent);
+
+  /* Sidebar */
+  --token-sidebar-bg:              var(--sidebar, oklch(0.985 0 0));
+  --token-sidebar-text:            var(--sidebar-foreground, oklch(0.145 0 0));
+  --token-sidebar-primary:         var(--sidebar-primary, oklch(0.205 0 0));
+  --token-sidebar-primary-text:    var(--sidebar-primary-foreground, oklch(0.985 0 0));
+  --token-sidebar-accent-bg:       var(--sidebar-accent, oklch(0.97 0 0));
+  --token-sidebar-accent-text:     var(--sidebar-accent-foreground, oklch(0.205 0 0));
+  --token-sidebar-border:          var(--sidebar-border, oklch(0.922 0 0));
+  --token-sidebar-ring:            var(--sidebar-ring, oklch(0.708 0 0));
+
+  /* ----------------------------------------------------------
+     2B. SPACING TOKENS — 8-step scale (multiples of 4px / 0.25rem)
+     ---------------------------------------------------------- */
+
+  --token-space-1:  0.25rem;   /*  4px */
+  --token-space-2:  0.5rem;    /*  8px */
+  --token-space-3:  0.75rem;   /* 12px */
+  --token-space-4:  1rem;      /* 16px */
+  --token-space-6:  1.5rem;    /* 24px */
+  --token-space-8:  2rem;      /* 32px */
+  --token-space-12: 3rem;      /* 48px */
+  --token-space-16: 4rem;      /* 64px */
+  --token-space-24: 6rem;      /* 96px */
+
+  /* Named semantic spacing */
+  --token-space-page-x-sm:  1.5rem;  /* px-6 — mobile page horizontal padding */
+  --token-space-page-x-md:  3rem;    /* px-12 — sm breakpoint */
+  --token-space-page-x-lg:  6rem;    /* px-24 — md breakpoint */
+  --token-space-page-x-xl:  8rem;    /* px-32 — lg breakpoint */
+  --token-space-page-y:     4rem;    /* py-16 — page vertical padding */
+  --token-space-section-y:  6rem;    /* py-24 — major section vertical padding */
+  --token-space-header-h:   2rem;    /* reserved header height approximate */
+
+  /* ----------------------------------------------------------
+     2C. TYPOGRAPHY TOKENS
+     ---------------------------------------------------------- */
+
+  /* Font families */
+  --token-font-display: "Jubel", serif;               /* Display / wordmark — font-display */
+  --token-font-sans:    var(--font-geist-sans), system-ui, sans-serif;  /* Body copy */
+  --token-font-mono:    var(--font-geist-mono), ui-monospace, monospace; /* Code */
+
+  /* Font sizes — maps globals.css @utility text-* */
+  --token-size-96:  6rem;       /* text-heading-96 */
+  --token-size-72:  4.5rem;     /* text-heading-72 */
+  --token-size-64:  4rem;       /* text-heading-64 */
+  --token-size-56:  3.5rem;     /* text-heading-56 */
+  --token-size-48:  3rem;       /* text-heading-48 */
+  --token-size-40:  2.5rem;     /* text-heading-40 */
+  --token-size-32:  2rem;       /* text-heading-32 */
+  --token-size-24:  1.5rem;     /* text-heading-24 / text-copy-24 */
+  --token-size-20:  1.25rem;    /* text-heading-20 / text-copy-20 / text-label-20 */
+  --token-size-18:  1.125rem;   /* text-copy-18 */
+  --token-size-16:  1rem;       /* text-heading-16 / text-copy-16 / text-label-16 */
+  --token-size-14:  0.875rem;   /* text-heading-14 / text-copy-14 / text-label-14 */
+  --token-size-13:  0.8125rem;  /* text-copy-13 / text-label-13 */
+  --token-size-12:  0.75rem;    /* text-label-12 */
+  --token-size-10:  0.625rem;   /* text-[10px] — "NEW" badge */
+
+  /* Font weights */
+  --token-weight-regular:   400;
+  --token-weight-medium:    500;
+  --token-weight-semibold:  600;
+  --token-weight-bold:      700;
+
+  /* Line heights */
+  --token-leading-tight:     1.05;   /* heading-96 */
+  --token-leading-snug:      1.1;    /* heading-72 / 64 */
+  --token-leading-normal:    1.2;    /* heading-40 */
+  --token-leading-relaxed:   1.5;    /* copy-16 / labels */
+  --token-leading-loose:     1.6;    /* copy-14 / copy-16 body */
+
+  /* Letter spacing */
+  --token-tracking-tight-4:  -0.04em;
+  --token-tracking-tight-3:  -0.03em;
+  --token-tracking-tight-2:  -0.02em;
+  --token-tracking-tight-1:  -0.01em;
+  --token-tracking-none:      0;
+  --token-tracking-wide:      0.05em;  /* tracking-wider, used on uppercase labels */
+
+  /* ----------------------------------------------------------
+     2D. BORDER RADIUS TOKENS
+     ---------------------------------------------------------- */
+
+  /* Base comes from globals.css --radius = 0.625rem (10px) */
+  --token-radius-none: 0;
+  --token-radius-sm:   calc(var(--radius, 0.625rem) - 4px);   /* ~6px  — rounded-sm */
+  --token-radius-md:   calc(var(--radius, 0.625rem) - 2px);   /* ~8px  — rounded-md */
+  --token-radius-base: var(--radius, 0.625rem);                /* 10px  — rounded-lg */
+  --token-radius-xl:   calc(var(--radius, 0.625rem) + 4px);   /* 14px  — rounded-xl */
+  --token-radius-2xl:  calc(var(--radius, 0.625rem) + 8px);   /* 18px  — rounded-2xl */
+  --token-radius-3xl:  calc(var(--radius, 0.625rem) + 12px);  /* 22px  — rounded-3xl */
+  --token-radius-4xl:  calc(var(--radius, 0.625rem) + 16px);  /* 26px  — rounded-4xl */
+  --token-radius-full: 9999px;                                 /* pill / avatar — rounded-full */
+
+  /* ----------------------------------------------------------
+     2E. ELEVATION / SHADOW TOKENS
+     ---------------------------------------------------------- */
+
+  /* Tailwind utility equivalents shown for reference */
+  --token-shadow-sm:   0 1px 2px 0 oklch(0 0 0 / 5%);          /* shadow-sm */
+  --token-shadow-base: 0 1px 3px 0 oklch(0 0 0 / 10%),
+                       0 1px 2px -1px oklch(0 0 0 / 10%);       /* shadow */
+  --token-shadow-md:   0 4px 6px -1px oklch(0 0 0 / 10%),
+                       0 2px 4px -2px oklch(0 0 0 / 10%);       /* shadow-md */
+  --token-shadow-lg:   0 10px 15px -3px oklch(0 0 0 / 10%),
+                       0 4px 6px -4px oklch(0 0 0 / 10%);       /* shadow-lg  — used on FloatingNav, ThemeToggle dropdown */
+  --token-shadow-2xl:  0 25px 50px -12px oklch(0 0 0 / 25%);    /* shadow-2xl — used on KeyboardShortcuts overlay */
+
+  /* Custom: pressed/inset key shadow — matches shadow-[0_2px_0_0_hsl(var(--border))] */
+  --token-shadow-key:  0 2px 0 0 var(--border, oklch(0.922 0 0));
+
+  /* ----------------------------------------------------------
+     2F. Z-INDEX TOKENS
+     ---------------------------------------------------------- */
+
+  --token-z-base:       0;
+  --token-z-raised:     10;    /* timeline dot z-10, nav gradient z-10 */
+  --token-z-dropdown:   50;    /* FloatingNav z-50, Lightbox arrows z-50, ThemeToggle dropdown */
+  --token-z-overlay:    200;   /* KeyboardShortcuts overlay z-[200] */
+  --token-z-nav-indicator: 1;  /* NavigationMenuIndicator z-[1] */
+
+  /* ----------------------------------------------------------
+     2G. MOTION / TRANSITION TOKENS
+     ---------------------------------------------------------- */
+
+  --token-duration-fast:    150ms;  /* hover colour transitions */
+  --token-duration-normal:  200ms;  /* icon rotations, gallery thumb scale, opacity transitions */
+  --token-duration-slow:    300ms;  /* timeline dot colour change, accordion expand */
+
+  --token-easing-default:   ease;
+  --token-easing-out:       ease-out;  /* accordion grid-template-rows transition */
+
+  /* Transition shorthand presets */
+  --token-transition-colors: color var(--token-duration-fast) var(--token-easing-default),
+                              background-color var(--token-duration-fast) var(--token-easing-default),
+                              border-color var(--token-duration-fast) var(--token-easing-default),
+                              text-decoration-color var(--token-duration-fast) var(--token-easing-default);
+
+  --token-transition-transform: transform var(--token-duration-normal) var(--token-easing-default);
+  --token-transition-opacity:   opacity var(--token-duration-normal) var(--token-easing-default);
+}
+
+/*
+ * ============================================================
+ * LAYER 3 — USAGE CONTRACT
+ * ============================================================
+ *
+ * RULE: All components and page files must reference --token-*
+ * variables ONLY. They must never:
+ *
+ *   - Hard-code hex colours:       color: #FFB224
+ *   - Hard-code rgb/rgba:          background: rgba(0,0,0,0.8)
+ *   - Hard-code oklch directly:    color: oklch(0.145 0 0)
+ *   - Hard-code raw px sizes:      font-size: 14px  (outside Tailwind config)
+ *   - Reference Layer 1 primitives directly: var(--prim-*)
+ *   - Reference shadcn primitives directly:  var(--foreground) etc.
+ *     (always go through the --token-* alias instead)
+ *
+ * RATIONALE: Layer 2 (--token-*) tokens are the only stable API.
+ * Layer 1 primitives and shadcn CSS variables are implementation
+ * details that may change when themes are added or the OKLCH scale
+ * is adjusted. Components that reference --token-* variables are
+ * automatically theme-agnostic and dark-mode-safe.
+ *
+ * EXCEPTIONS (allowed Tailwind arbitrary values):
+ *   - Layout-only viewport values: max-h-[90vh], max-h-[70vh]
+ *   - Grid template definitions:   grid-cols-[240px_1fr]
+ *   - Inherited Radix UI vars:      h-[var(--radix-*)]
+ *   - Geometric micro-adjustments: top-[1px], top-[60%]
+ *
+ * AUDIT: Run `node scripts/token-audit.js` to check for violations.
+ * ============================================================
+ */
