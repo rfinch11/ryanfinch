@@ -19,7 +19,7 @@ export default function ResumePage() {
         <ThemeToggle />
       </header>
 
-      <main className="pt-12">
+      <main className="mx-auto w-full max-w-2xl pt-12">
         <WorkTimeline />
       </main>
 

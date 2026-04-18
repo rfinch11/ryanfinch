@@ -90,7 +90,13 @@ const WORK_HISTORY: WorkEntry[] = [
       { src: "/Ford Heros/Screen Shot 2023-08-23 at 11.17.png", type: "image" },
       { src: "/Ford Heros/image 19.png", type: "image" },
     ],
-    links: [],
+    links: [
+      {
+        label: "Ford and ADT to Form Joint Venture",
+        href: "https://media.ford.com/content/fordmedia/feu/en/news/2022/01/18/ford-and-adt-to-form-joint-venture-to-fortify-vehicle-security-w.html",
+        description: "Led the initial incubation of the connected security project that became Canopy, a $100m JV between Ford and ADT pairing Ford's AI camera tech with ADT's remote monitoring services. Later folded under Ford Secure.",
+      },
+    ],
   },
   {
     id: "crown",
@@ -261,7 +267,7 @@ function GalleryLightbox({
 }
 
 export function WorkTimeline() {
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(WORK_HISTORY.map((e) => e.id)));
   const [lightbox, setLightbox] = useState<{ items: GalleryItem[]; index: number } | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -302,7 +308,7 @@ export function WorkTimeline() {
 
   return (
     <div ref={wrapperRef}>
-      <div className="relative max-w-2xl">
+      <div className="relative">
         {/* Timeline line */}
         <div className="absolute bottom-0 left-0 top-0 hidden w-px bg-border md:block" />
         {/* Timeline top: expand/collapse all chevron arrowhead */}

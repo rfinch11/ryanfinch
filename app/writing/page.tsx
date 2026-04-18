@@ -16,7 +16,7 @@ export default function WritingPage() {
       </header>
 
       <main className="my-auto py-24">
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col items-start gap-1">
           {posts.map((post) => (
             <Link
               key={post.slug}
